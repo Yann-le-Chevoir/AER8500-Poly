@@ -19,9 +19,9 @@ if __name__ == '__main__':
     # Attente d'un message UDP de l'instrument (de la MPIC qui le remplace) a la reception du message CAN bus
     # (Non realiste : l'instrument n'est pas connecté en UDP en vrai - c'est pour l'exemple)
     data = socket_udp.recv(1024)
-    print("Donnee recue :", data.decode()) # A350 KCCU a recu le message (0, 1, 2, 3, 4, 5, 6, 7)
+    print("Donnee recue :", data.decode()) # A350 KCCU a recu le message 0xaabbccddeeffaabb
     
-    # Envoi d'un message TCP à la MPIC :
+    # Envoi d'un message TCP a la MPIC :
     # Simule une application CAE (Windows + Ethernet) qui veut communiquer avec un instrument A429 (B737 MAX FANS MCDU)    
     # On utilise la MPIC comme Interface (Ethernet <-> A429)
     conn_tcp.send(b"a429")
@@ -29,7 +29,8 @@ if __name__ == '__main__':
     # Attente d'un message UDP de l'instrument (de la MPIC qui le remplace) a la reception du message A429
     # (Non realiste : l'instrument n'est pas connecté en UDP en vrai - c'est pour l'exemple)
     data = socket_udp.recv(1024)
-    print("Donnee recue :", data.decode()) # B737 MAX FANS MCDU a recu le message xxxxxx
+    print("Donnee recue :", data.decode()) # B737 MAX FANS MCDU a recu le message 0b10010001100011000100010000001101
+
 
     # Fermeture des sockets
     socket_udp.close()
